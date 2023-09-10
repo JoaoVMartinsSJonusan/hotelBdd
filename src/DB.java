@@ -4,13 +4,15 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
 public class DB {
-
+    static PreparedStatement st = null;
+    static ResultSet rs = null;
     private static Connection conn = null;
 
     public static Connection getConnection() {
@@ -23,6 +25,7 @@ public class DB {
                 throw new DbExceptions(e.getMessage());
             }
         }
+
         return conn;
     }
 
@@ -33,7 +36,6 @@ public class DB {
             } catch (SQLException e) {
                 throw new DbExceptions(e.getMessage());
             }
-
         }
     }
 
@@ -41,6 +43,7 @@ public class DB {
         try (FileInputStream fs = new FileInputStream("DB.properties")) {
             Properties props = new Properties();
             props.load(fs);
+            
             return props;
         } catch (IOException e) {
             throw new DbExceptions(e.getMessage());
@@ -58,8 +61,8 @@ public class DB {
     }
     
     public static void closeResultSet(ResultSet rs) {
-        if (rs != null){    
-            try{
+        if (rs != null) {
+            try {
                 rs.close();
             } catch (SQLException e) {
                 throw new DbExceptions(e.getMessage());
@@ -67,6 +70,11 @@ public class DB {
         }
     }
 
+    public static void close() {
+        closeConnetion();
+        closeResultSet(rs);
+        closeStatement(st);
+    }
 }
 
 
