@@ -43,7 +43,7 @@ public class DB {
         try (FileInputStream fs = new FileInputStream("DB.properties")) {
             Properties props = new Properties();
             props.load(fs);
-            
+
             return props;
         } catch (IOException e) {
             throw new DbExceptions(e.getMessage());
@@ -76,6 +76,3 @@ public class DB {
         closeStatement(st);
     }
 }
-
-
-

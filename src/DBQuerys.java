@@ -59,7 +59,8 @@ public class DBQuerys {
             // Inserir um registro na tabela de reserva usando o idHospede como chave
             // estrangeira
             insertHotel = conn.prepareStatement(
-                    "INSERT INTO reserva (IdHospede, IdQuarto, CheckIn, CheckOut) VALUES (?, ?, ?, ?)");
+                "INSERT INTO reserva (IdHospede, IdQuarto, CheckIn, CheckOut) VALUES (?, ?, ?, ?)"
+            );
             insertHotel.setInt(1, idHospede);
             insertHotel.setInt(2, idQuarto);
             insertHotel.setString(3, checkinOk);
@@ -141,7 +142,7 @@ public class DBQuerys {
             while (rs.next()) {
                 try{
                     if (rs.findColumn("idHospede") != 0) {
-                    System.out.println("id hospede: " + rs.getInt("idHospede"));
+                        System.out.println("id hospede: " + rs.getInt("idHospede"));
                     }
                 } catch (SQLException e) {
 
