@@ -18,6 +18,7 @@ public class DBQuerys {
     private Connection conn;
     Scanner sc = new Scanner(System.in);
 
+    //quando instanciado no main, inicia a conexao com o banco de dados
     public DBQuerys() {
         conn = DB.getConnection();
     }
@@ -45,19 +46,18 @@ public class DBQuerys {
             int idQuarto = sc.nextInt();
             System.out.println("Digite o final da estadia dd/mm/yyyy: ");
             String checkout = sc.next();
-            stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+            stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS); //este metodo retorna as linhas afetadas
             int idHospede = -1;
 
             ResultSet rs = stmt.getGeneratedKeys();
 
             if (rs.next()) {
-                idHospede = rs.getInt(1);
+                idHospede = rs.getInt(1); //aqui pega o id que foi cadastrado no novo hospede para ser usado na chave estramgeira
             }
 
             String checkinOk = sdf.format(checkin);
 
-            // Inserir um registro na tabela de reserva usando o idHospede como chave
-            // estrangeira
+            // Inserir um registro na tabela de reserva usando o idHospede como chave estrangeira
             insertHotel = conn.prepareStatement(
                 "INSERT INTO reserva (IdHospede, IdQuarto, CheckIn, CheckOut) VALUES (?, ?, ?, ?)"
             );
@@ -70,7 +70,7 @@ public class DBQuerys {
             e.printStackTrace();
         }
     }
-
+    //esse metodo lista as tabelas selecionadas, o metodo busca na linha 130 é para evitar a repetição de codigo
     public void listar(String tabela) {
         switch (tabela) {
             case "quartos":
@@ -86,21 +86,14 @@ public class DBQuerys {
 
                 break;
             case "cadastro":
-                busca("SELECT\n" + //
-                        "    reserva.idReserva,\n" + //
-                        "    hospedes.nome AS nomeHospede,\n" + //
-                        "    reserva.CheckIn,\n" + //
-                        "    reserva.CheckOut\n" + //
-                        "FROM\n" + //
-                        "    reserva\n" + //
-                        "INNER JOIN\n" + //
-                        "    hospedes ON reserva.idHospede = hospedes.idHospede;");
+                busca("SELECT reserva.idReserva, hospedes.nome AS nomeHospede, reserva.CheckIn, reserva.CheckOut FROM reserva INNER JOIN hospedes ON reserva.idHospede = hospedes.idHospede;");
+
                 break;
             default:
                 break;
         }
     }
-
+    //metodo para fazer a exclusão de hospedes pelo nome ou id
     public void deletarHospedes() {
         try {
             System.out.println("Deseja excluir por nome ou id: \n[1] Nome \n[2] Id");

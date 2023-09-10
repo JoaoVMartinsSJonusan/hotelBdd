@@ -15,6 +15,7 @@ public class DB {
     static ResultSet rs = null;
     private static Connection conn = null;
 
+    //metodo para fazer a conexão com o banco de dados
     public static Connection getConnection() {
         if (conn == null) {
             try {
@@ -69,7 +70,7 @@ public class DB {
             }
         }
     }
-
+    //função para chamar todos os closes nescessario para evitar um problema de seguranca com o banco de dados
     public static void close() {
         closeConnetion();
         closeResultSet(rs);

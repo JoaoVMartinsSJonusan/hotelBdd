@@ -5,6 +5,7 @@ import src.DB;
 import src.DBQuerys;
 
 public class App {
+    //Função para limpar a tela do terminal quando for chamada
     public static void limpartela() {
         try {
             final String os = System.getProperty("os.name");
@@ -26,7 +27,7 @@ public class App {
             Scanner sc = new Scanner(System.in);      
             int escolha;
             limpartela();
-
+            //Menu
             do {
                 System.out.println("Sitema do Hotel JG");
                 System.out.println("[1] Cadastrar Cliente\n[2] Opções de Listagem\n[3] Remover Clientes\n[5] Sair");
