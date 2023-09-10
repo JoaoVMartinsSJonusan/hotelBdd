@@ -66,6 +66,7 @@ public class DBQuerys {
             insertHotel.setString(3, checkinOk);
             insertHotel.setString(4, checkout);
             insertHotel.executeUpdate();
+            sc.nextLine();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -116,6 +117,53 @@ public class DBQuerys {
                     int id = sc.nextInt();
                     String sqlid = "DELETE FROM hospedes WHERE idHospede = '" + id + "'";
                     st = DB.getConnection().prepareStatement(sqlid);
+                    st.execute();
+
+                    break;
+                default:
+                    break;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void atualizarDados() {
+        try {
+            System.out.println("Digite qual dado quer atualizar: [1] Nome\n[2] Email\n[3] Telefone ");
+            System.out.print("Escolha sua opção: ");
+            int escolha = sc.nextInt();
+            switch (escolha) {
+                case 1:
+                    sc.nextLine();
+                    System.out.print("Digite o nome do Hospede: ");
+                    String nome_hospede = sc.nextLine();
+                    System.out.println("Digite o novo nome a ser atualizado: ");
+                    String nomeAtt = sc.nextLine();                    
+                    String sql = "UPDATE hospedes SET Nome = '" + nomeAtt + "' WHERE (Nome = '" + nome_hospede + "')";
+                    st = DB.getConnection().prepareStatement(sql);
+                    st.execute();
+
+                    break;
+                case 2:
+                    sc.nextLine();
+                    System.out.print("Digite o email do Hospede: ");
+                    String emailHospede = sc.nextLine();
+                    System.out.println("Digite o novo Email a ser atualizado: ");
+                    String emailAtt = sc.nextLine();                    
+                    String sqlemail = "UPDATE hospedes SET Email = '" + emailAtt + "' WHERE (Email = '" + emailHospede + "')";
+                    st = DB.getConnection().prepareStatement(sqlemail);
+                    st.execute();
+
+                    break;
+                case 3:
+                    sc.nextLine();
+                    System.out.print("Digite o Telefone do Hospede: ");
+                    int telefoneHospede = sc.nextInt();
+                    System.out.println("Digite o novo Telefone a ser atualizado: ");
+                    int telefoneAtt = sc.nextInt();                    
+                    String sqltelefone = "UPDATE hospedes SET Telefone = '" + telefoneAtt + "' WHERE (Telefone = " + telefoneHospede + ")";
+                    st = DB.getConnection().prepareStatement(sqltelefone);
                     st.execute();
 
                     break;

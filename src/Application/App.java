@@ -27,19 +27,20 @@ public class App {
             Scanner sc = new Scanner(System.in);      
             int escolha;
             limpartela();
+            
             //Menu
             do {
                 System.out.println("Sitema do Hotel JG");
-                System.out.println("[1] Cadastrar Cliente\n[2] Opções de Listagem\n[3] Remover Clientes\n[5] Sair");
+                System.out.println("[1] Cadastrar Cliente\n[2] Opções de Listagem\n[3] Remover Clientes\n[4] Atualizar dados\n[5] Sair");
                 System.out.print("Escolha uma opção: ");
                 escolha = sc.nextInt();
                 
                 switch (escolha) {
                     case 1:
-                        limpartela();
+                        
                         sc.nextLine();
                         dbq.cadastroHospede();
-                        limpartela();
+                        
 
                         break;
                     case 2:
@@ -77,6 +78,9 @@ public class App {
                         dbq.deletarHospedes();
                         limpartela();
 
+                        break;
+                    case 4:
+                        dbq.atualizarDados();
                         break;
                     default:
                         break;
