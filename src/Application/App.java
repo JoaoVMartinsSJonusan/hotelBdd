@@ -27,62 +27,65 @@ public class App {
             int escolha;
             limpartela();
 
-            do {
-                System.out.println("Sitema do Hotel JG");
-                System.out.println("[1] Cadastrar Cliente\n[2] Opções de Listagem\n[3] Remover Clientes\n[5] Sair");
-                System.out.print("Escolha uma opção: ");
-                escolha = sc.nextInt();
-                
-                switch (escolha) {
-                    case 1:
-                        limpartela();
-                        sc.nextLine();
-                        dbq.cadastroHospede();
-                        limpartela();
+            do { 
+                System.out.println("Sitema do Hotel JG"); 
+                System.out.println("[1] Cadastrar Cliente\n[2] Opções de Listagem\n[3] Remover Clientes\n[4] Atualizar dados\n[5] Sair"); 
+                System.out.print("Escolha uma opção: "); 
+                escolha = sc.nextInt(); 
 
-                        break;
-                    case 2:
-                        limpartela();
-                        System.out.println("Escolha uma das opções de listagem:");
-                        System.out.println("[1] Listar Hospedes\n[2] Listar Quartos\n[3] Listar Reservas\n[4] Listar Relação de Reservas");
-                        System.out.println("Escolha sua opção: ");
-                        int escolhaLista = sc.nextInt();
-                        limpartela();
+                switch (escolha) { 
+                    case 1: 
+                        sc.nextLine(); 
+                        dbq.cadastroHospede(); 
 
-                        switch (escolhaLista) {
-                            case 1:
-                                dbq.listar("hospedes");
+                        break; 
+                    case 2: 
+                        limpartela(); 
+                        System.out.println("Escolha uma das opções de listagem:"); 
+                        System.out.println("[1] Listar Hospedes\n[2] Listar Quartos\n[3] Listar Reservas\n[4] Listar Relação de Reservas"); 
+                        System.out.println("Escolha sua opção: "); 
+                        int escolhaLista = sc.nextInt(); 
+                        limpartela(); 
 
-                                break;
-                            case 2:
-                                dbq.listar("quartos");
+                        switch (escolhaLista) { 
+                            case 1: 
+                                dbq.listar("hospedes"); 
 
-                                break;
-                            case 3:
-                                dbq.listar("reservas");
+                                break; 
+                            case 2: 
+                                dbq.listar("quartos"); 
 
-                                break;
-                            case 4:
-                                dbq.listar("cadastro");
+                                break; 
+                            case 3: 
+                                dbq.listar("reservas"); 
 
-                                break;
-                            default:
-                                break;
+                                break; 
+                            case 4: 
+                                dbq.listar("cadastro"); 
+
+                                break; 
+
+                            default: 
+                                break; 
                         }
+            
+                        break; 
+                    case 3: 
+                        limpartela(); 
+                        dbq.deletarHospedes(); 
+                        limpartela(); 
+
+                        break; 
+                    case 4: 
+                        dbq.atualizarDados();
                         
-                        break;
-                    case 3:
-                        limpartela();
-                        dbq.deletarHospedes();
-                        limpartela();
+                        break; 
+                    default: 
+                        break; 
+                } 
+            } while (escolha != 5); 
 
-                        break;
-                    default:
-                        break;
-                }
-            } while (escolha != 5);
-
-            DB.close();
-            sc.close();
-    }
-}
+            DB.close(); 
+            sc.close(); 
+    } 
+} 

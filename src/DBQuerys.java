@@ -134,6 +134,53 @@ public class DBQuerys {
         }
     }
 
+    public void atualizarDados() { 
+        try { 
+            System.out.println("Digite qual dado quer atualizar: [1] Nome\n[2] Email\n[3] Telefone "); 
+            System.out.print("Escolha sua opção: "); 
+            int escolha = sc.nextInt(); 
+
+            switch (escolha) { 
+                case 1: 
+                    sc.nextLine(); 
+                    System.out.print("Digite o nome do Hospede: "); 
+                    String nome_hospede = sc.nextLine(); 
+                    System.out.println("Digite o novo nome a ser atualizado: "); 
+                    String nomeAtt = sc.nextLine();                     
+                    String sql = "UPDATE hospedes SET Nome = '" + nomeAtt + "' WHERE (Nome = '" + nome_hospede + "')"; 
+                    st = DB.getConnection().prepareStatement(sql); 
+                    st.execute();
+                    
+                    break; 
+                case 2: 
+                    sc.nextLine(); 
+                    System.out.print("Digite o email do Hospede: "); 
+                    String emailHospede = sc.nextLine(); 
+                    System.out.println("Digite o novo Email a ser atualizado: "); 
+                    String emailAtt = sc.nextLine();                     
+                    String sqlemail = "UPDATE hospedes SET Email = '" + emailAtt + "' WHERE (Email = '" + emailHospede + "')"; 
+                    st = DB.getConnection().prepareStatement(sqlemail); 
+                    st.execute(); 
+
+                    break; 
+                case 3: 
+                    sc.nextLine(); 
+                    System.out.print("Digite o Telefone do Hospede: "); 
+                    int telefoneHospede = sc.nextInt(); 
+                    System.out.println("Digite o novo Telefone a ser atualizado: "); 
+                    int telefoneAtt = sc.nextInt();                     
+                    String sqltelefone = "UPDATE hospedes SET Telefone = '" + telefoneAtt + "' WHERE (Telefone = " + telefoneHospede + ")"; 
+                    st = DB.getConnection().prepareStatement(sqltelefone); 
+
+                    break; 
+                default: 
+                    break; 
+            } 
+        } catch (SQLException e) { 
+            e.printStackTrace(); 
+        } 
+    } 
+
     private void busca(String sql) {
         try {
             st = DB.getConnection().prepareStatement(sql);
@@ -144,83 +191,63 @@ public class DBQuerys {
                     if (rs.findColumn("idHospede") != 0) {
                         System.out.println("id hospede: " + rs.getInt("idHospede"));
                     }
-                } catch (SQLException e) {
-
-                }
+                } catch (SQLException e) {}
                 
                 try {
                     if (rs.findColumn("idReserva") != 0) {
                         System.out.println("Numero reserva: " + rs.getInt("idReserva"));
                     }
 
-                } catch (SQLException e) {
-
-                }
+                } catch (SQLException e) {}
 
                 try {
                     if (rs.findColumn("idQuarto") != 0) {
                         System.out.println("Numero Quarto: " + rs.getInt("idQuarto"));
                     }
-                } catch (SQLException e) {
-
-                }
+                } catch (SQLException e) {}
 
                 try {
                     if (rs.findColumn("Nome") != 0) {
                         System.out.println("Nome: " + rs.getString("Nome"));
                     }
-                } catch (SQLException e) {
-
-                }
+                } catch (SQLException e) {}
 
                 try {
                     if (rs.findColumn("Email") != 0) {
                         System.out.println("Email: " + rs.getString("Email"));
                     }
-                } catch (SQLException e) {
-
-                }
+                } catch (SQLException e) {}
 
                 try {
                     if (rs.findColumn("Telefone") != 0) {
                         System.out.println("Telefone: " + rs.getLong("Telefone"));
                     }
 
-                } catch (SQLException e) {
-
-                }
+                } catch (SQLException e) {}
 
                 try {
                     if (rs.findColumn("nomeHospede") != 0) {
                         System.out.println("Nome: " + rs.getString("nomeHospede"));
                     }
-                } catch (SQLException e) {
-
-                }
+                } catch (SQLException e) {}
 
                 try {
                     if (rs.findColumn("TipoQuarto") != 0) {
                         System.out.println("Tipo Quarto: " + rs.getString("TipoQuarto"));
                     }
-                } catch (SQLException e) {
-
-                }
+                } catch (SQLException e) {}
 
                 try {
                     if (rs.findColumn("DiariaValor") != 0) {
                         System.out.println("Valor: " + rs.getString("DiariaValor"));
                     }
-                } catch (SQLException e) {
-
-                }
+                } catch (SQLException e) {}
 
                 try {
                     if (rs.findColumn("CheckIn") != 0) {
                         System.out.println("CheckIn: " + rs.getString("CheckIn"));
                     }
-                } catch (SQLException e) {
-
-                }
+                } catch (SQLException e) {}
 
                 System.out.println();
             }
